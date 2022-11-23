@@ -1,22 +1,10 @@
-
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import Home from './src/screens/Home';
 
 const App = () => {
-  return(
-    <SafeAreaView style={styles.safeView}>
-      <View style={styles.view}>
-        <Text>Hello</Text>
-      </View>
-    </SafeAreaView>
-    
-  )
-}
+  return <Home />;
+};
 
 const styles = StyleSheet.create({
   safeView: {
@@ -26,7 +14,7 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     backgroundColor: 'green',
-  }
+  },
 });
 
 export default App;
