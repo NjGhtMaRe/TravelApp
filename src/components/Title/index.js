@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import styles from './styles';
 
-const Title = ({text}) => {
+const Title = ({text, style}) => {
 
-  return <Text style={styles.title}>{text}</Text>;
+  return <Text style={[styles.title, style]}>{text}</Text>;
 };
 
 Title.defaultProps = {
