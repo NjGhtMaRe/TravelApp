@@ -3,9 +3,9 @@ import { Image, Text, View} from 'react-native';
 import styles from './styles';
 import '../../assets/location.png';
 
-const AttractionCard = ({ imageSrc, title, subtitle }) => {
+const AttractionCard = ({ imageSrc, title, subtitle, style }) => {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, style]}>
       <Image style={styles.image} source={{ uri: imageSrc }} />
       <Text style={styles.title}>{title}</Text>
       <View style={styles.row}>

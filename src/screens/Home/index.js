@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {View, Text, SafeAreaView, ScrollView} from 'react-native';
 import AttractionCard from '../../components/AttractionCard';
 import Categories from '../../components/Categories';
 import Title from '../../components/Title';
 import styles from './styles';
+import jsonData from '../../data/attractions.json';
+import categoriesData from '../../data/categories.json'
 
 const Home = () => {
-  const [selectedCategories, setSelectedCategories] = useState('All');
+  const [selectedCategories, setSelectedCategories] = useState(categoriesData[0]);
+  const [data, setData] = useState([]);
+
+  useEffect (() => {
+    console.log('categories: ', categoriesData)
+    setData(jsonData);
+  },[]);
   return (
     <SafeAreaView >
       <View style={styles.container}>
@@ -16,24 +24,23 @@ const Home = () => {
         <Categories 
           selectedCategories={selectedCategories} 
           onCategoriesPress={setSelectedCategories}
-          categories={['All', 'Popular', 'History', 'Trending', 'Random', 'Exclusive', 'Others']} 
+          categories={categoriesData} 
         />
-        <View style={styles.row}>
-          <AttractionCard 
-            imageSrc="https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1592&q=80"
-            title="Collesuem"
-            subtitle="Rome"
+        <ScrollView contentContainerStyle={styles.row}>
+          {data?.map((item, index) => (
+            <AttractionCard 
+              key={item.id}
+              style={index % 2 === 0 ? { marginRight: 12 } : {}}
+              imageSrc={item.images?.length ? item.images[0]: null}
+              title={item.name}
+              subtitle={item.city}
           />
-          <AttractionCard 
-            imageSrc="https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1592&q=80"
-            title="Collesuem"
-            subtitle="Rome"
-          />
-        </View>
+          ))}
+        </ScrollView>
       </View>
       
     </SafeAreaView>
   );
 };
 
-export default React.memo(Home);
+export default React.memo(Home); 

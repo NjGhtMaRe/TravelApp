@@ -3,11 +3,11 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   card: {
-    marginRight: 16,
     borderWidth: 1,
     borderRadius: 15,
     padding: 4,
-    borderColor: '#E2E2E2'
+    borderColor: '#E2E2E2',
+    marginBottom: 8
   },
   image: {
     width: (width - 96) / 2,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     borderRadius:15
   },
   title: {
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: '600',
     marginTop: 8,
     marginLeft: 8,
