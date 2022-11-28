@@ -7,6 +7,7 @@ const Categories = ({categories, selectedCategories, onCategoriesPress}) => {
     <FlatList
       horizontal 
       data={categories} 
+      showsHorizontalScrollIndicator={false}
       renderItem={({item}) => {
         const selected = selectedCategories === item;
         return(

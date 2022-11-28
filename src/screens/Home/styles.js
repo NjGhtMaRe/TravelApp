@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 40,
     marginBottom: 18,
+  },
+  row: {
+    flexDirection: 'row',
   }
 });
 
