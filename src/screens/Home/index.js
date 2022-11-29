@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, Text, SafeAreaView, ScrollView} from 'react-native';
+import {View, Text, SafeAreaView, ScrollView, FlatList} from 'react-native';
 import AttractionCard from '../../components/AttractionCard';
 import Categories from '../../components/Categories';
 import Title from '../../components/Title';
@@ -17,7 +17,7 @@ const Home = () => {
   },[]);
   return (
     <SafeAreaView >
-      <View style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Title text="Where do" style={{fontWeight: 'normal'}} />
         <Title text="you want to go?" />
         <Title text="Explore Attractions" style={styles.subtitle} />
@@ -26,18 +26,33 @@ const Home = () => {
           onCategoriesPress={setSelectedCategories}
           categories={categoriesData} 
         />
-        <ScrollView contentContainerStyle={styles.row}>
-          {data?.map((item, index) => (
+        {/* <ScrollView contentContainerStyle={styles.row}>
+          {[...data, ...data]?.map((item, index) => (
             <AttractionCard 
-              key={item.id}
+              key={item.id} 
               style={index % 2 === 0 ? { marginRight: 12 } : {}}
               imageSrc={item.images?.length ? item.images[0]: null}
               title={item.name}
               subtitle={item.city}
-          />
+            />
           ))}
-        </ScrollView>
-      </View>
+        </ScrollView> */}
+        <FlatList
+          data={data}
+          numColumns={2}
+          keyExtractor={item => String(item?.id)}
+          renderItem={({item, index}) => (
+            <AttractionCard 
+              key={item.id} 
+              style={index % 2 === 0 ? { marginRight: 12 } : {}}
+              imageSrc={item.images?.length ? item.images[0]: null}
+              title={item.name}
+              subtitle={item.city}
+            />
+          )}
+        />
+
+      </ScrollView>
       
     </SafeAreaView>
   );
