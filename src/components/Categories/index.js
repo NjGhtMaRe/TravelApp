@@ -7,7 +7,7 @@ const Categories = ({categories, selectedCategories, onCategoriesPress}) => {
     <FlatList
       horizontal 
       data={categories} 
-      keyExtractor={item => String(item?.id)}
+      keyExtractor={item => String(item)}
       showsHorizontalScrollIndicator={false}
       renderItem={({item, index}) => {
         const selected = selectedCategories === item;

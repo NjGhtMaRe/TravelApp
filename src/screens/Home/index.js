@@ -28,17 +28,18 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container} >
       <FlatList
-        data={[...data]}
+        data={data}
         numColumns={2}
+        style={{ flexGrow: 1 }}
         keyExtractor={item => String(item?.id)}
         ListEmptyComponent={(<Text style={styles.emptyText}>No item found.</Text>)}
         ListHeaderComponent={(
           <>
-          <View>
-            <Title text="Where do" style={{fontWeight: 'normal'}} />
-            <Title text="you want to go?" />
-            <Title text="Explore Attractions" style={styles.subtitle} />
-          </View>
+            <View>
+              <Title text="Where do" style={{fontWeight: 'normal'}} />
+              <Title text="you want to go?" />
+              <Title text="Explore Attractions" style={styles.subtitle} />
+            </View>
             <Categories 
               selectedCategories={selectedCategories} 
               onCategoriesPress={setSelectedCategories}
@@ -46,10 +47,10 @@ const Home = () => {
             />
         </>
         )}
-        renderItem={({item, index}) => (
+        renderItem={({ item, index }) => (
           <AttractionCard 
             key={item.id} 
-            style={index % 2 === 0 ? { marginRight: 12, marginLeft: 32 } : {}}
+            style={index % 2 === 0 ? { marginRight: 12, marginLeft: 32 } : { marginRight: 32 }}
             imageSrc={item.images?.length ? item.images[0]: null}
             title={item.name}
             subtitle={item.city}
