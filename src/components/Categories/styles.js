@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   itemContainer: {
-    marginVertical: 14,
+    marginBottom: 14,
     marginRight: 17,
   },
   selectedItemContainer: {

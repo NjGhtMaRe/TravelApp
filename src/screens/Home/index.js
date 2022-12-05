@@ -7,52 +7,55 @@ import styles from './styles';
 import jsonData from '../../data/attractions.json';
 import categoriesData from '../../data/categories.json'
 
+const ALL = "All"
 const Home = () => {
   const [selectedCategories, setSelectedCategories] = useState(categoriesData[0]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([ALL]);
 
   useEffect (() => {
-    console.log('categories: ', categoriesData)
     setData(jsonData);
-  },[]);
-  return (
-    <SafeAreaView >
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <Title text="Where do" style={{fontWeight: 'normal'}} />
-        <Title text="you want to go?" />
-        <Title text="Explore Attractions" style={styles.subtitle} />
-        <Categories 
-          selectedCategories={selectedCategories} 
-          onCategoriesPress={setSelectedCategories}
-          categories={categoriesData} 
-        />
-        {/* <ScrollView contentContainerStyle={styles.row}>
-          {[...data, ...data]?.map((item, index) => (
-            <AttractionCard 
-              key={item.id} 
-              style={index % 2 === 0 ? { marginRight: 12 } : {}}
-              imageSrc={item.images?.length ? item.images[0]: null}
-              title={item.name}
-              subtitle={item.city}
-            />
-          ))}
-        </ScrollView> */}
-        <FlatList
-          data={data}
-          numColumns={2}
-          keyExtractor={item => String(item?.id)}
-          renderItem={({item, index}) => (
-            <AttractionCard 
-              key={item.id} 
-              style={index % 2 === 0 ? { marginRight: 12 } : {}}
-              imageSrc={item.images?.length ? item.images[0]: null}
-              title={item.name}
-              subtitle={item.city}
-            />
-          )}
-        />
+  }, []);
 
-      </ScrollView>
+  useEffect(() => {
+    if (selectedCategories === ALL) {
+      setData(jsonData)
+    } else {
+      const filteredData = jsonData?.filter(item => item?.categories?.includes(selectedCategories))
+      setData(filteredData)
+    }
+  },[selectedCategories])
+
+  return (
+    <SafeAreaView style={styles.container} >
+      <FlatList
+        data={[...data]}
+        numColumns={2}
+        keyExtractor={item => String(item?.id)}
+        ListEmptyComponent={(<Text style={styles.emptyText}>No item found.</Text>)}
+        ListHeaderComponent={(
+          <>
+          <View>
+            <Title text="Where do" style={{fontWeight: 'normal'}} />
+            <Title text="you want to go?" />
+            <Title text="Explore Attractions" style={styles.subtitle} />
+          </View>
+            <Categories 
+              selectedCategories={selectedCategories} 
+              onCategoriesPress={setSelectedCategories}
+              categories={[ALL, ...categoriesData]} 
+            />
+        </>
+        )}
+        renderItem={({item, index}) => (
+          <AttractionCard 
+            key={item.id} 
+            style={index % 2 === 0 ? { marginRight: 12, marginLeft: 32 } : {}}
+            imageSrc={item.images?.length ? item.images[0]: null}
+            title={item.name}
+            subtitle={item.city}
+          />
+        )}
+      />
       
     </SafeAreaView>
   );
