@@ -9,8 +9,8 @@ import categoriesData from '../../data/categories.json'
 
 const ALL = "All"
 const Home = () => {
-  const [selectedCategories, setSelectedCategories] = useState(categoriesData[0]);
-  const [data, setData] = useState([ALL]);
+  const [selectedCategories, setSelectedCategories] = useState(ALL);
+  const [data, setData] = useState([]);
 
   useEffect (() => {
     setData(jsonData);
