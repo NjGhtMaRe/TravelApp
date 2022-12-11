@@ -52,7 +52,7 @@ const Home = () => {
         renderItem={({ item, index }) => (
           <AttractionCard 
             key={item.id} 
-            onPress={() => navigation.navigate('AttractionDetails')}
+            onPress={() => navigation.navigate('AttractionDetails', { item })}
             style={index % 2 === 0 ? { marginRight: 12, marginLeft: 32 } : { marginRight: 32 }}
             imageSrc={item.images?.length ? item.images[0]: null}
             title={item.name}

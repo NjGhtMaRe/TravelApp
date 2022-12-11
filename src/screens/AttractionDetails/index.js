@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Text, SafeAreaView } from 'react-native';
+import React from 'react';
+import { Text, SafeAreaView, ImageBackground } from 'react-native';
 import styles from './styles';
 
-const AttractionDetails = () => {
+const AttractionDetails = ({ navigation, route }) => {
+  const { item } = route?.params || {};
+  const mainImage = item?.images.length ? item.images[0] : null;
+  const onBack = () => {
+    navigation.goBack()
+  }
   return (
-    <SafeAreaView style={styles.container} >
-      <Text>AttractionDetails</Text>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground style={styles.mainImage} imageStyle={{ borderRadius: 20 }} source={{ uri: mainImage }} />
+      <Text onPress={onBack}style={{ margin: 32}}>BACK</Text>
+      <Text>{item?.name}</Text>
     </SafeAreaView>
   );
 };
