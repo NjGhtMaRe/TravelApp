@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(256,256,256,0.35)',
     margin: 16,
     paddingHorizontal: 8,
+  },
+  moreImages: {
+    position: 'absolute',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 24,
+    top: 13,
+    left: 8
   }
 });
 

@@ -6,7 +6,8 @@ import styles from './styles';
 const AttractionDetails = ({ navigation, route }) => {
   const { item } = route?.params || {};
   const mainImage = item?.images?.length ? item.images[0] : null;
-  const slicedImage = item?.images?.length ? item?.images.slice(0,5) : []
+  const slicedImage = item?.images?.length ? item?.images.slice(0,5) : [];
+  const diffImages = item?.images?.length - slicedImage?.length;
   const onBack = () => {
     navigation.goBack()
   }
@@ -18,16 +19,24 @@ const AttractionDetails = ({ navigation, route }) => {
         source={{ uri: mainImage }}
       >
         <View style={styles.header}>
-          <Pressable hitSlop={8}>
-            <Image onPress={onBack}style={styles.icon} source={require('../../assets/back.png')}/>
+          <Pressable onPress={onBack} hitSlop={8}>
+            <Image style={styles.icon} source={require('../../assets/back.png')}/>
           </Pressable>
           <Pressable hitSlop={8}>
             <Image onPress={onBack}style={styles.icon} source={require('../../assets/share.png')}/>
           </Pressable>
         </View>
         <View style={styles.footer}>
-          {slicedImage?.map(image => (
-            <Image key={image} source={{ uri: image }} style={styles.miniImage} />
+          {slicedImage?.map(( image, index ) => (
+            <View key={image}>
+              <Image source={{ uri: image }} style={styles.miniImage} />
+              {diffImages > 0 && index === slicedImage?.length -1 ? (
+                <Text style={styles.moreImages}>
+                  {`+${diffImages}`}
+                </Text>
+              ) : null
+              }
+            </View>
           ))}
         </View>
       </ImageBackground> 
