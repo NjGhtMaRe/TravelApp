@@ -42,12 +42,40 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   moreImages: {
-    position: 'absolute',
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 24,
-    top: 13,
-    left: 8
+    fontSize: 20,
+  },
+  moreImagesContainer: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,0.38)',
+    width: 40,
+    height: 40,
+    marginLeft: 4,
+    marginTop: 8,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  detailsContainer: {
+    margin: 16,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 22,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  city: {
+    marginVertical: 8,
+    fontWeight: '500',
+  },
+  price: {
+    fontWeight: 'bold',
+    fontSize: 22,
+    marginVertical: 14
   }
 });
 

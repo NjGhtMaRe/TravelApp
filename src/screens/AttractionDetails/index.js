@@ -11,6 +11,9 @@ const AttractionDetails = ({ navigation, route }) => {
   const onBack = () => {
     navigation.goBack()
   }
+  const onGalerryNavigation = () => {
+    navigation.navigate('Gallery', { items: item?.images })
+  }
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground 
@@ -28,19 +31,25 @@ const AttractionDetails = ({ navigation, route }) => {
         </View>
         <View style={styles.footer}>
           {slicedImage?.map(( image, index ) => (
-            <View key={image}>
+            <Pressable onPress={onGalerryNavigation} key={image}>
               <Image source={{ uri: image }} style={styles.miniImage} />
               {diffImages > 0 && index === slicedImage?.length -1 ? (
-                <Text style={styles.moreImages}>
-                  {`+${diffImages}`}
-                </Text>
+                <View style={styles.moreImagesContainer}>
+                  <Text style={styles.moreImages}>{`+${diffImages}`}</Text>
+                </View>
               ) : null
               }
-            </View>
+            </Pressable>
           ))}
         </View>
       </ImageBackground> 
-      <Text>{item?.name}</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{item?.name}</Text>
+          <Text style={styles.price}>{item?.entry_price}</Text>
+        </View>
+        <Text style={styles.city}>{item?.city}</Text>
+      </View>
     </SafeAreaView>
   );
 };
