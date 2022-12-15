@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, SafeAreaView, ImageBackground, Image, View } from 'react-native';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import InfoCard from "../../components/InfoCard";
+import Title from "../../components/Title";
 import styles from './styles';
 
 const AttractionDetails = ({ navigation, route }) => {
@@ -45,10 +47,18 @@ const AttractionDetails = ({ navigation, route }) => {
       </ImageBackground> 
       <View style={styles.headerContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{item?.name}</Text>
-          <Text style={styles.price}>{item?.entry_price}</Text>
+          <Title text={item?.name} style={styles.title} />
+          <Text style={styles.city}>{item?.city}</Text>
+        </View> 
+          <Title text={item?.entry_price} style={styles.title} />
+      </View>
+      <InfoCard icon={require('../../assets/location_circle.png')} text={item?.address} />
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <InfoCard icon={require('../../assets/schedule.png')} text={''} />
+        <View>
+          <Text style={{fontSize: 12}}>Open</Text>
+          <Text style={{fontSize: 12}}>{`${item?.opening_time} - ${item?.closing_time}`}</Text>
         </View>
-        <Text style={styles.city}>{item?.city}</Text>
       </View>
     </SafeAreaView>
   );

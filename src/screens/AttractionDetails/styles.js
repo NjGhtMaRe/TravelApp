@@ -61,16 +61,22 @@ const styles = StyleSheet.create({
     margin: 16,
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 22,
+    color: 'black',
+    marginLeft: 0
   },
   headerContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center' ,
+    marginTop: 40,
+  },
+  textContainer: {
     justifyContent: 'space-between'
   },
   city: {
-    marginVertical: 8,
-    fontWeight: '500',
+    fontWeight: '400',
+    fontSize: 20,
+    margin: 8,
   },
   price: {
     fontWeight: 'bold',
