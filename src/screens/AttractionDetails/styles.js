@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'black',
-    marginLeft: 0
+    marginLeft: 0,
+    fontSize: 24
   },
   headerContainer: {
     flexDirection: 'row',
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   city: {
     fontWeight: '400',
     fontSize: 20,
-    margin: 8,
+    marginVertical: 8,
   },
   price: {
     fontWeight: 'bold',

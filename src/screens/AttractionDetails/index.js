@@ -14,7 +14,7 @@ const AttractionDetails = ({ navigation, route }) => {
     navigation.goBack()
   }
   const onGalerryNavigation = () => {
-    navigation.navigate('Gallery', { items: item?.images })
+    navigation.navigate('Gallery', { images: item?.images })
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -56,8 +56,8 @@ const AttractionDetails = ({ navigation, route }) => {
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <InfoCard icon={require('../../assets/schedule.png')} text={''} />
         <View>
-          <Text style={{fontSize: 12}}>Open</Text>
-          <Text style={{fontSize: 12}}>{`${item?.opening_time} - ${item?.closing_time}`}</Text>
+          <Text style={{ fontSize: 12, fontWeight: '400' }}>Open</Text>
+          <Text style={{ fontSize: 12, fontWeight: '400' }}>{`${item?.opening_time} - ${item?.closing_time}`}</Text>
         </View>
       </View>
     </SafeAreaView>
