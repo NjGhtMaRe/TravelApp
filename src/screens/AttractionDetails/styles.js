@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -83,6 +83,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     marginVertical: 14
+  },
+  map: {
+    width: '100%',
+    height: 200,
+    borderRadius: 20,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  showMap: {
+    fontWeight: 'bold',
+    fontSize: 14,
+    textAlign: 'center',
+    color: '#4681A3',
+    marginBottom: 40,
   }
 });
 

@@ -12,3 +12,4 @@ const InfoCard = ({ icon,text, style }) => {
 };
 
 export default React.memo(InfoCard);
+ 

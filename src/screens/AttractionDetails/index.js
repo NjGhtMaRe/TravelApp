@@ -1,23 +1,35 @@
 import React from 'react';
-import { Text, SafeAreaView, ImageBackground, Image, View } from 'react-native';
+import { Text, SafeAreaView, ImageBackground, Image, View, ScrollView } from 'react-native';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import MapView, { Marker } from 'react-native-maps';
 import InfoCard from "../../components/InfoCard";
 import Title from "../../components/Title";
 import styles from './styles';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const AttractionDetails = ({ navigation, route }) => {
   const { item } = route?.params || {};
   const mainImage = item?.images?.length ? item.images[0] : null;
   const slicedImage = item?.images?.length ? item?.images.slice(0,5) : [];
   const diffImages = item?.images?.length - slicedImage?.length;
+  const coords = {
+    latitude: item?.coordinates.lat, 
+    longitude: item?.coordinates.lon,
+    latitudeDelta: 0.005,
+    longitudeDelta: 0.003,
+  }
   const onBack = () => {
     navigation.goBack()
   }
   const onGalerryNavigation = () => {
     navigation.navigate('Gallery', { images: item?.images })
   }
+  const onMapNavigation = () => {
+    navigation.navigate('Map', {item})
+  }
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground 
         style={styles.mainImage} 
         imageStyle={{ borderRadius: 20 }} 
@@ -54,12 +66,17 @@ const AttractionDetails = ({ navigation, route }) => {
       </View>
       <InfoCard icon={require('../../assets/location_circle.png')} text={item?.address} />
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <InfoCard icon={require('../../assets/schedule.png')} text={''} />
+        <InfoCard icon={require('../../assets/schedule.png')}/>
         <View>
           <Text style={{ fontSize: 12, fontWeight: '400' }}>Open</Text>
           <Text style={{ fontSize: 12, fontWeight: '400' }}>{`${item?.opening_time} - ${item?.closing_time}`}</Text>
         </View>
       </View>
+      <MapView style={styles.map} initialRegion={coords}>
+        <Marker coordinate={coords} title={item?.name}/>
+      </MapView>
+      <Text style={styles.showMap} onPress={onMapNavigation}>Show fullscreen Map</Text>
+      </ScrollView>
     </SafeAreaView>
   );
 };
