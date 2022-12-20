@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   showMap: {
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'center',
     color: '#4681A3',
     marginBottom: 40,

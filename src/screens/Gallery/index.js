@@ -4,10 +4,11 @@ import styles from './styles';
 
 const Gallery = ({ navigation, route }) => {
   const { images } = route?.params || {};
+  
   const onBack = () => {
     navigation.goBack()
   }
-  console.log("Images:>> " , images  )
+
   return (
     <SafeAreaView style={styles.container} >
       <View >

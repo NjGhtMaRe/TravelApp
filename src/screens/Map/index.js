@@ -9,8 +9,8 @@ const Map = ({ navigation, route }) => {
   const coords = {
     latitude: item?.coordinates.lat, 
     longitude: item?.coordinates.lon,
-    latitudeDelta: 0.005,
-    longitudeDelta: 0.003,
+    latitudeDelta: 0.009,
+    longitudeDelta: 0.007,
   };
   const onBack = () => {
     navigation.goBack()
@@ -20,11 +20,13 @@ const Map = ({ navigation, route }) => {
     <View style={styles.container}>
         <MapView style={styles.map} initialRegion={coords}>
           <Marker coordinate={coords} title={item?.name}/>
-        </MapView>     
-        <Pressable style={styles.header} onPress={onBack} hitSlop={8}>
+        </MapView> 
+        <View style={styles.header}>
+          <Pressable onPress={onBack} hitSlop={8}>
             <Image style={styles.icon} source={require('../../assets/back.png')}/>
-            <Text style={styles.title}>{`${item.name}, ${item.city}`}</Text>
-        </Pressable>
+          </Pressable>
+          <Text style={styles.title}>{`${item.name}, ${item.city}`}</Text>
+        </View>    
     </View>
   );
 };

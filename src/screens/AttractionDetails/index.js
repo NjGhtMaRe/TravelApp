@@ -2,31 +2,59 @@ import React from 'react';
 import { Text, SafeAreaView, ImageBackground, Image, View, ScrollView } from 'react-native';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import MapView, { Marker } from 'react-native-maps';
+import Share from 'react-native-share';
+import ImgToBase64 from 'react-native-image-base64';
 import InfoCard from "../../components/InfoCard";
 import Title from "../../components/Title";
 import styles from './styles';
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const AttractionDetails = ({ navigation, route }) => {
   const { item } = route?.params || {};
   const mainImage = item?.images?.length ? item.images[0] : null;
   const slicedImage = item?.images?.length ? item?.images.slice(0,5) : [];
   const diffImages = item?.images?.length - slicedImage?.length;
+
   const coords = {
     latitude: item?.coordinates.lat, 
     longitude: item?.coordinates.lon,
-    latitudeDelta: 0.005,
-    longitudeDelta: 0.003,
-  }
+    latitudeDelta: 0.009,
+    longitudeDelta: 0.007,
+  };
+
   const onBack = () => {
     navigation.goBack()
+  };
+
+  const onShare = async () => {
+    try {
+      const imageWithoutParams = mainImage?.split('?')[0]
+      const imageParts = imageWithoutParams.split('.')
+      const imageExtension = imageParts[imageParts?.length - 1]
+      const base64Image = await ImgToBase64.getBase64String(mainImage)
+      Share.open({ 
+        title: item?.name, 
+        message: "Hello, I would like to share this",
+        url: `data: image/${imageExtension || 'jpg'};base64,${base64Image}`
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        err && console.log(err);
+      });    
+    } catch (e) {
+      console.log("Sharing error:>> ", e);
+    }
   }
+
   const onGalerryNavigation = () => {
     navigation.navigate('Gallery', { images: item?.images })
-  }
+  };
+
   const onMapNavigation = () => {
     navigation.navigate('Map', {item})
-  }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -39,8 +67,8 @@ const AttractionDetails = ({ navigation, route }) => {
           <Pressable onPress={onBack} hitSlop={8}>
             <Image style={styles.icon} source={require('../../assets/back.png')}/>
           </Pressable>
-          <Pressable hitSlop={8}>
-            <Image onPress={onBack}style={styles.icon} source={require('../../assets/share.png')}/>
+          <Pressable onPress={onShare} hitSlop={8}>
+            <Image style={styles.icon} source={require('../../assets/share.png')}/>
           </Pressable>
         </View>
         <View style={styles.footer}>
